@@ -221,129 +221,6 @@
             max-width: 520px;
         }
 
-        /* VIDEO */
-
-        .video-card {
-            text-align: center;
-        }
-
-        .video-thumb {
-            margin: 14px auto 0;
-            display: block;
-            width: 100%;
-            max-width: 760px;
-            border: none;
-            padding: 0;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .video-thumb-inner {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
-            border: 1px solid rgba(255, 223, 186, 0.14);
-            background: rgba(28, 16, 11, 0.9);
-        }
-
-        .video-thumb img {
-            display: block;
-            width: 100%;
-            height: auto;
-            filter: saturate(1.02) contrast(1.03);
-        }
-
-        .video-play {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.15) 0, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.75) 100%);
-        }
-
-        .video-play-btn {
-            width: 86px;
-            height: 86px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            background: rgba(217, 164, 90, 0.92);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.6);
-            display: grid;
-            place-items: center;
-        }
-
-        .video-play-btn::before {
-            content: "";
-            width: 0;
-            height: 0;
-            border-top: 14px solid transparent;
-            border-bottom: 14px solid transparent;
-            border-left: 22px solid #3b2414;
-            margin-left: 4px;
-        }
-
-        .video-hint {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 18px;
-            background: rgba(0, 0, 0, 0.82);
-            z-index: 9999;
-        }
-
-        .modal.is-open {
-            display: flex;
-        }
-
-        .modal-inner {
-            width: min(1100px, 100%);
-            background: rgba(28, 16, 11, 0.96);
-            border-radius: 18px;
-            border: 1px solid rgba(255, 223, 186, 0.18);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
-            overflow: hidden;
-        }
-
-        .modal-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 10px 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .modal-title {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .modal-close {
-            border: 1px solid rgba(255,255,255,0.18);
-            background: rgba(0,0,0,0.25);
-            color: var(--text-main);
-            border-radius: 999px;
-            padding: 8px 12px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        .modal video {
-            width: 100%;
-            height: auto;
-            display: block;
-            background: #000;
-        }
-
         .card {
             background: rgba(28, 16, 11, 0.9);
             border-radius: 22px;
@@ -571,25 +448,6 @@
         </div>
     </section>
 
-    <!-- VIDEO PRISTATYMAS -->
-    <section class="card video-card" id="video">
-        <div class="card-header">
-            <div class="card-kicker">Video pristatymas</div>
-            <h2 class="card-title">Pažiūrėkite trumpą klipo pavyzdį</h2>
-        </div>
-        <p>Paspauskite ant nuotraukos – atsidarys video ir pradės groti.</p>
-
-        <button class="video-thumb" type="button" id="openVideo">
-            <span class="video-thumb-inner">
-                <img src="assets/hero-photo.png" alt="Atgaivinti prisiminimai – video pristatymas">
-                <span class="video-play" aria-hidden="true">
-                    <span class="video-play-btn"></span>
-                </span>
-            </span>
-        </button>
-        <div class="video-hint">Jei garsas išjungtas, įjunkite jį video grotuve.</div>
-    </section>
-
     <!-- APIE PASLAUGĄ + KAIP VYKSTA -->
     <section class="layout-two">
         <article class="card">
@@ -735,53 +593,6 @@
     </footer>
 
 </div>
-
-<!-- VIDEO MODAL -->
-<div class="modal" id="videoModal" aria-hidden="true">
-    <div class="modal-inner" role="dialog" aria-modal="true" aria-label="Video pristatymas">
-        <div class="modal-bar">
-            <div class="modal-title">Atgaivinti prisiminimai – video pristatymas</div>
-            <button class="modal-close" type="button" id="closeVideo">Uždaryti</button>
-        </div>
-        <video id="promoVideo" controls playsinline preload="metadata">
-            <source src="atgaivinti_prisiminimai_ video pristatymas.mp4" type="video/mp4">
-            Jūsų naršyklė nepalaiko video.
-        </video>
-    </div>
-</div>
-
-<script>
-    (function () {
-        const modal = document.getElementById('videoModal');
-        const openBtn = document.getElementById('openVideo');
-        const closeBtn = document.getElementById('closeVideo');
-        const video = document.getElementById('promoVideo');
-
-        function openModal() {
-            modal.classList.add('is-open');
-            modal.setAttribute('aria-hidden', 'false');
-            try {
-                video.currentTime = 0;
-                video.play();
-            } catch (e) {}
-        }
-
-        function closeModal() {
-            modal.classList.remove('is-open');
-            modal.setAttribute('aria-hidden', 'true');
-            try { video.pause(); } catch (e) {}
-        }
-
-        openBtn?.addEventListener('click', openModal);
-        closeBtn?.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-        });
-    })();
-</script>
 
 </body>
 </html>
